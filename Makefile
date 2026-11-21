@@ -42,3 +42,6 @@ kueue-install:
 
 queues-up:
 	kubectl apply -f kueue/flavor.yaml -f kueue/cluster-queues.yaml -f kueue/teams.yaml
+
+kwok-runtime:
+	kubectl patch stage pod-complete --type=merge --patch-file cluster/kwok-pod-complete-delay.json

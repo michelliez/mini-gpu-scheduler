@@ -1,0 +1,10 @@
+{
+  "spec": {
+    "delay": {
+      "durationMilliseconds": 60000,
+      "durationFrom": {
+        "expressionFrom": ".metadata.annotations[\"pod-complete.stage.kwok.x-k8s.io/delay\"]"
+      }
+    }
+  }
+}

@@ -1,13 +1,16 @@
 apiVersion: batch/v1
 kind: Job
 metadata:
-  generateName: train-         
+  generateName: train-
   namespace: team-a
   labels:
     kueue.x-k8s.io/queue-name: team-a-lq
 spec:
-  suspend: true 
+  suspend: true
   template:
+    metadata:
+      annotations:
+        pod-complete.stage.kwok.x-k8s.io/delay: "30s"
     spec:
       restartPolicy: Never
       containers:
