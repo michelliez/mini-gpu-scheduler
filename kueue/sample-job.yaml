@@ -1,0 +1,18 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  generateName: train-         
+  namespace: team-a
+  labels:
+    kueue.x-k8s.io/queue-name: team-a-lq
+spec:
+  suspend: true 
+  template:
+    spec:
+      restartPolicy: Never
+      containers:
+        - name: train
+          image: fake-image
+          resources:
+            requests: {cpu: "1", memory: 1Gi}
+            limits: {nvidia.com/gpu: 4}

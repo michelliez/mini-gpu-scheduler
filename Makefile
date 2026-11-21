@@ -24,3 +24,21 @@ gpu-nodes-down:
 
 gpus:
 	kubectl get nodes -l type=kwok -o custom-columns=NODE:.metadata.name,GPU:.status.allocatable.nvidia\\.com/gpu
+
+KUEUE_VERSION := v0.20.7
+
+kueue-install:
+	kubectl apply --server-side -f https://github.com/kubernetes-sigs/kueue/releases/download/$(KUEUE_VERSION)/manifests.yaml
+	kubectl wait deploy/kueue-controller-manager -n kueue-system --for=condition=available --timeout=300s
+
+queues-up:
+	kubectl apply -f kueue/flavor.yaml -f kueue/cluster-queues.yaml -f kueue/teams.yaml
+
+KUEUE_VERSION := v0.20.7
+
+kueue-install:
+	kubectl apply --server-side -f https://github.com/kubernetes-sigs/kueue/releases/download/$(KUEUE_VERSION)/manifests.yaml
+	kubectl wait deploy/kueue-controller-manager -n kueue-system --for=condition=available --timeout=300s
+
+queues-up:
+	kubectl apply -f kueue/flavor.yaml -f kueue/cluster-queues.yaml -f kueue/teams.yaml
