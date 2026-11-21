@@ -45,3 +45,17 @@ queues-up:
 
 kwok-runtime:
 	kubectl patch stage pod-complete --type=merge --patch-file cluster/kwok-pod-complete-delay.json
+
+watch:
+	scripts/watch-queues.sh
+
+clean-jobs:
+	kubectl delete jobs --all -n team-a
+	kubectl delete jobs --all -n team-b
+
+watch:
+	scripts/watch-queues.sh
+
+clean-jobs:
+	kubectl delete jobs --all -n team-a
+	kubectl delete jobs --all -n team-b

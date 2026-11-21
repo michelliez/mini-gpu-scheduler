@@ -1,0 +1,21 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  generateName: train-
+  namespace: TEAM
+  labels:
+    kueue.x-k8s.io/queue-name: TEAM-lq
+spec:
+  suspend: true
+  template:
+    metadata:
+      annotations:
+        pod-complete.stage.kwok.x-k8s.io/delay: "RUNTIME"
+    spec:
+      restartPolicy: Never
+      containers:
+        - name: train
+          image: fake-image
+          resources:
+            requests: {cpu: "1", memory: 1Gi}
+            limits: {nvidia.com/gpu: GPUS}
