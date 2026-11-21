@@ -1,0 +1,10 @@
+# 1 control-plane + 2 real workers.
+# Real workers run actual containers (model server, DDP).
+# KWOK fake GPU nodes are added in Step 2 for scheduling experiments.
+kind: Cluster
+apiVersion: kind.x-k8s.io/v1alpha4
+name: gpu-sim
+nodes:
+  - role: control-plane
+  - role: worker
+  - role: worker
