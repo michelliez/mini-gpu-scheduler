@@ -1,0 +1,26 @@
+# Fake GPU node managed by KWOK. NODE_NAME is replaced by scripts/kwok-nodes.sh
+apiVersion: v1
+kind: Node
+metadata:
+  name: NODE_NAME
+  annotations:
+    kwok.x-k8s.io/node: fake           # tells KWOK "you own this node"
+    node.alpha.kubernetes.io/ttl: "0"
+  labels:
+    kubernetes.io/hostname: NODE_NAME
+    kubernetes.io/os: linux
+    kubernetes.io/arch: amd64
+    type: kwok                         # used by nodeSelector / Kueue later
+    gpu.model: sim-a100                # pretend GPU model
+spec:
+  taints:                              # keep normal pods off fake nodes
+    - key: kwok.x-k8s.io/node
+      value: fake
+      effect: NoSchedule
+status:
+  capacity:    {cpu: "32", memory: 256Gi, pods: "110", nvidia.com/gpu: "8"}
+  allocatable: {cpu: "32", memory: 256Gi, pods: "110", nvidia.com/gpu: "8"}
+  nodeInfo:
+    architecture: amd64
+    operatingSystem: linux
+    kubeletVersion: fake
